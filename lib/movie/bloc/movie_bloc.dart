@@ -1,5 +1,5 @@
-import 'package:bloc/bloc.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'dart:collection';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:themoviedb_repository/themoviedb_repository.dart';
@@ -21,6 +21,7 @@ class MovieBloc extends HydratedBloc<MovieEvent, MovieState> {
         super(const _Initial());
 
   final TheMovieDBRepository _repository;
+//  final HashMap<String, List<Movie>>  a;
 
   @override
   Future<void> clear() {
@@ -82,5 +83,29 @@ class MovieBloc extends HydratedBloc<MovieEvent, MovieState> {
         yield _LoadFailure(NetworkExceptions.getErrorMessage(error));
       },
     );
+
+    // yield* state.maybeWhen(
+    //   loadSuccess: (movies) async* {
+    //     if (movies != null) {
+    //       log.w('${movies[0].title} 007');
+    //       yield _LoadSuccess(movies);
+    //     }
+    //   },
+    //   orElse: () async* {
+    //     yield const _LoadInProgress();
+    //     final results = await _repository.fetchMovie();
+    //     yield* results.when(
+    //       success: (data) async* {
+    //         final movies = data.map((e) {
+    //           return Movie.fromJson(e.toJson());
+    //         }).toList();
+    //         yield _LoadSuccess(movies);
+    //       },
+    //       failure: (error) async* {
+    //         yield _LoadFailure(NetworkExceptions.getErrorMessage(error));
+    //       },
+    //     );
+    //   },
+    // );
   }
 }

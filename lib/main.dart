@@ -19,8 +19,10 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key key, @required TheMovieDBRepository repository})
-      : assert(repository != null),
+  const MyApp({
+    Key key,
+    @required TheMovieDBRepository repository,
+  })  : assert(repository != null),
         _repository = repository,
         super(key: key);
 

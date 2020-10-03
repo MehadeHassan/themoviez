@@ -13,10 +13,11 @@ final log = getLogger('MovieDetailsBloc');
 
 class MovieDetailsBloc
     extends HydratedBloc<MovieDetailsEvent, MovieDetailsState> {
-  MovieDetailsBloc(TheMovieDBRepository repository)
-      : assert(repository != null),
+  MovieDetailsBloc(
+    TheMovieDBRepository repository,
+  )   : assert(repository != null),
         _repository = repository,
-        super(_Initial());
+        super(const _Initial());
 
   final TheMovieDBRepository _repository;
 
@@ -93,7 +94,7 @@ class MovieDetailsBloc
     );
 */
 
-    yield _LoadInProgress();
+    yield const _LoadInProgress();
     final res = await _repository.fetchMovieDetails(event.movie_id);
 
     yield* res.when(
